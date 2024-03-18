@@ -1,4 +1,4 @@
-package com.myorg.pipeline
+package com.epam.pipeline
 
 class TestStage implements Serializable {
     def utils = new Utils()

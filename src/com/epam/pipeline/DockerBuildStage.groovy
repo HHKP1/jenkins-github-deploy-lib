@@ -1,4 +1,4 @@
-package com.myorg.pipeline
+package com.epam.pipeline
 
 class DockerBuildStage implements Serializable {
     def script

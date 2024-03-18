@@ -1,4 +1,4 @@
-package com.myorg.pipeline
+package com.epam.pipeline
 
 class Utils implements Serializable {
     def printMessage(String message) {

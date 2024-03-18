@@ -1,4 +1,4 @@
 def call() {
-    def testStage = new com.myorg.pipeline.TestStage()
+    def testStage = new com.epam.pipeline.TestStage()
     testStage.run()
 }

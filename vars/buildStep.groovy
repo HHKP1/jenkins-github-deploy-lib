@@ -1,4 +1,4 @@
 def call() {
-    def buildStage = new com.myorg.pipeline.BuildStage()
+    def buildStage = new com.epam.pipeline.BuildStage()
     buildStage.run()
 }
