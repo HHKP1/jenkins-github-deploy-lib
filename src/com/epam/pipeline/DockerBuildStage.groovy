@@ -27,7 +27,12 @@ class DockerBuildStage implements Serializable {
 
             script.writeFile file: 'Dockerfile', text: dockerfileContent
 
-            script.sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
+            script.sh """
+		docker build \
+			--cache-from ${dockerImageName}:${dockerImageTag} \
+			--build-arg BUILDKIT_INLINE_CACHE=1 \
+			-t ${dockerImageName}:${dockerImageTag} .
+	    """
             script.sh "docker push ${dockerImageName}:${dockerImageTag}"
         }
     }
