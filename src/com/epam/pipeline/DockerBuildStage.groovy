@@ -24,7 +24,7 @@ class DockerBuildStage implements Serializable {
             utils.printMessage('Building the Docker image...')
             script.sh "echo ${script.DOCKER_ACCESS_TOKEN} | docker login --username hhkp --password-stdin"
 
-            def dockerfileContent = script.libraryResource(dockerfileTemplate)
+            def dockerfileContent = script.libraryResource("templates/${dockerfileTemplate}")
             dockerfileContent = dockerfileContent.replace('${NODE_VERSION}', nodeVersion)
             dockerfileContent = dockerfileContent.replace('${CONTAINER_PORT}', containerPort.toString())
 
