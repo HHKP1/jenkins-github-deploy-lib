@@ -2,6 +2,7 @@ package com.epam.pipeline
 
 class DockerBuildStage implements Serializable {
     def script
+    def utils
     String dockerfileTemplate
     String dockerImageName
     String dockerImageTag
@@ -10,6 +11,7 @@ class DockerBuildStage implements Serializable {
 
     DockerBuildStage(script, String dockerfileTemplate, String dockerImageName, String dockerImageTag, String nodeVersion, int containerPort) {
         this.script = script
+        this.utils = new Utils(script)
         this.dockerfileTemplate = dockerfileTemplate
         this.dockerImageName = dockerImageName
         this.dockerImageTag = dockerImageTag
@@ -19,6 +21,7 @@ class DockerBuildStage implements Serializable {
 
     def run() {
         script.withCredentials([script.string(credentialsId: 'docker-access-token', variable: 'DOCKER_ACCESS_TOKEN')]) {
+            utils.printMessage('Building the Docker image...')
             script.sh "echo ${script.DOCKER_ACCESS_TOKEN} | docker login --username hhkp --password-stdin"
 
             def dockerfileContent = script.libraryResource(dockerfileTemplate)
