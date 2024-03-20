@@ -3,6 +3,7 @@ package com.epam.pipeline
 class DockerBuildStage implements Serializable {
     def script
     def utils
+    String registry
     String dockerfileTemplate
     String dockerImageName
     String dockerImageTag
