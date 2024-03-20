@@ -1,4 +1,4 @@
-def call() {
-    def buildStage = new com.epam.pipeline.BuildStage()
+def call(script) {
+    def buildStage = new com.epam.pipeline.BuildStage(script)
     buildStage.run()
 }

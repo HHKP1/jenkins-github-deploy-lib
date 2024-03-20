@@ -1,12 +1,13 @@
 package com.epam.pipeline
 
 class BuildStage implements Serializable {
-    def utils = new Utils()
+    def script
+    def utils = new Utils(script)
 
     def run() {
         utils.printMessage('Building the application...')
-        sh "ls -la && pwd"
-        sh 'npm config ls'
-        sh 'npm install'
+        script.sh "ls -la && pwd"
+        script.sh 'npm config ls'
+        script.sh 'npm install'
     }
 }
