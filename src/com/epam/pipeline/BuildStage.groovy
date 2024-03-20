@@ -2,7 +2,12 @@ package com.epam.pipeline
 
 class BuildStage implements Serializable {
     def script
-    def utils = new Utils(script)
+    def utils
+    
+    BuildStage(script) {
+        this.script = script
+        this.utils = new Utils(script)
+    }
 
     def run() {
         utils.printMessage('Building the application...')
