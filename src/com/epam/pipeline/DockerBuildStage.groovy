@@ -25,10 +25,6 @@ class DockerBuildStage implements Serializable {
             utils.printMessage('Building the Docker image...')
             script.sh "echo ${script.DOCKER_ACCESS_TOKEN} | docker login --username hhkp --password-stdin"
 
-            // Debug: Print resolved path to the resource
-            def resourcePath = "com/epam/pipeline/templates/${dockerfileTemplate}"
-            utils.printMessage("Resolved resource path: ${resourcePath}")
-
             def dockerfileContent = script.libraryResource("com/epam/pipeline/templates/${dockerfileTemplate}")
             utils.printMessage("Dockerfile content resource path: ${dockerfileContent}")
             dockerfileContent = dockerfileContent.replace('${NODE_VERSION}', nodeVersion)
@@ -37,7 +33,7 @@ class DockerBuildStage implements Serializable {
             script.writeFile file: 'Dockerfile', text: dockerfileContent
 
             script.sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
-            script.sh "docker push ${hhkp}/${dockerImageName}:${dockerImageTag}"
+            script.sh "docker push ${registry}/${dockerImageName}:${dockerImageTag}"
         }
     }
 }
