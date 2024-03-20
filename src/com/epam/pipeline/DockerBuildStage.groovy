@@ -25,10 +25,10 @@ class DockerBuildStage implements Serializable {
             script.sh "echo ${script.DOCKER_ACCESS_TOKEN} | docker login --username hhkp --password-stdin"
 
             // Debug: Print resolved path to the resource
-            def resourcePath = "templates/${dockerfileTemplate}"
+            def resourcePath = "com/epam/pipeline/templates/${dockerfileTemplate}"
             utils.printMessage("Resolved resource path: ${resourcePath}")
 
-            def dockerfileContent = script.libraryResource("templates/${dockerfileTemplate}")
+            def dockerfileContent = script.libraryResource("com/epam/pipeline/templates/${dockerfileTemplate}")
             utils.printMessage("Dockerfile content resource path: ${dockerfileContent}")
             dockerfileContent = dockerfileContent.replace('${NODE_VERSION}', nodeVersion)
             dockerfileContent = dockerfileContent.replace('${CONTAINER_PORT}', containerPort.toString())
