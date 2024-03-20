@@ -9,9 +9,10 @@ class DockerBuildStage implements Serializable {
     String nodeVersion
     int containerPort
 
-    DockerBuildStage(script, String dockerfileTemplate, String dockerImageName, String dockerImageTag, String nodeVersion, int containerPort) {
+    DockerBuildStage(script, String registry, String dockerfileTemplate, String dockerImageName, String dockerImageTag, String nodeVersion, int containerPort) {
         this.script = script
         this.utils = new Utils(script)
+        this.registry = registry
         this.dockerfileTemplate = dockerfileTemplate
         this.dockerImageName = dockerImageName
         this.dockerImageTag = dockerImageTag
@@ -36,7 +37,7 @@ class DockerBuildStage implements Serializable {
             script.writeFile file: 'Dockerfile', text: dockerfileContent
 
             script.sh "docker build -t ${dockerImageName}:${dockerImageTag} ."
-            script.sh "docker push ${dockerImageName}:${dockerImageTag}"
+            script.sh "docker push ${hhkp}/${dockerImageName}:${dockerImageTag}"
         }
     }
 }
