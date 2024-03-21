@@ -2,22 +2,24 @@ package com.epam.pipeline
 
 class DeployStage implements Serializable {
     def script
+    String registry
     String dockerImageName
     String dockerImageTag
     String containerName
+    int hostPort
     int containerPort
 
-    DeployStage(script, String dockerImageName, String dockerImageTag, String containerName, int containerPort) {
+    DeployStage(script, String registry, String dockerImageName, String dockerImageTag, String containerName, int hostPort, int containerPort) {
         this.script = script
+        this.registry = registry
         this.dockerImageName = dockerImageName
         this.dockerImageTag = dockerImageTag
         this.containerName = containerName
+        this.hostPort = hostPort
         this.containerPort = containerPort
     }
 
     def run() {
-        script.sh "docker stop ${containerName} || true"
-        script.sh "docker rm -f ${containerName} || true"
-        script.sh "docker run -d --expose ${containerPort} -p ${containerPort}:3000 --name ${containerName} ${dockerImageName}:${dockerImageTag}"
+        script.sh "docker run -d --expose ${containerPort} -p ${hostPort}:${containerPort} --name ${containerName} ${registry}/${dockerImageName}:${dockerImageTag}"
     }
 }
