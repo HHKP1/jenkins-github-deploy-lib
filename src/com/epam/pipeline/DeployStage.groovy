@@ -17,7 +17,7 @@ class DeployStage implements Serializable {
 
     def run() {
         script.sh "docker stop ${containerName} || true"
-        script.sh "docker rm ${containerName} || true"
-        script.sh "docker run -d --expose ${containerPort} -p ${containerPort}:${containerPort} --name ${containerName} ${dockerImageName}:${dockerImageTag}"
+        script.sh "docker rm -f ${containerName} || true"
+        script.sh "docker run -d --expose ${containerPort} -p ${containerPort}:3000 --name ${containerName} ${dockerImageName}:${dockerImageTag}"
     }
 }
