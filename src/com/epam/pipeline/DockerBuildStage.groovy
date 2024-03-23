@@ -37,11 +37,11 @@ class DockerBuildStage implements Serializable {
             script.sh "docker rm -f ${containerName} 2>/dev/null || true"
             script.sh "docker rmi -f ${registry}/${dockerImageName}:${dockerImageTag} 2>/dev/null || true"
             script.sh """
-		docker build \
-			--cache-from ${registry}/${dockerImageName}:${dockerImageTag} \
-			--build-arg BUILDKIT_INLINE_CACHE=1 \
-			-t ${registry}/${dockerImageName}:${dockerImageTag} \
-			.
+                docker build \
+                    --cache-from ${registry}/${dockerImageName}:${dockerImageTag} \
+                    --build-arg BUILDKIT_INLINE_CACHE=1 \
+                    -t ${registry}/${dockerImageName}:${dockerImageTag} \
+                    .
             """
             script.sh "docker push ${registry}/${dockerImageName}:${dockerImageTag}"
         }
