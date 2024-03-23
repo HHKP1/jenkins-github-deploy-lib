@@ -12,11 +12,7 @@ class CheckoutStage implements Serializable {
     }
 
     def run() {
-        script.checkout(
-            // branches: branches.collect { [name: it] },
-            // changelog: true,
-            // clean: true,
-            scm: [$class: 'GitSCM',
+        script.checkout([$class: 'GitSCM',
                 branches: branches.collect { [name: it] },
                 userRemoteConfigs: [[url: gitUrl]],
                 extensions: [
