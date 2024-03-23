@@ -16,7 +16,7 @@ class CheckoutStage implements Serializable {
             // branches: branches.collect { [name: it] },
             // changelog: true,
             // clean: true,
-            // scm: [$class: 'GitSCM',
+            scm: [$class: 'GitSCM',
                 branches: branches.collect { [name: it] },
                 userRemoteConfigs: [[url: gitUrl]],
                 extensions: [
