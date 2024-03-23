@@ -35,7 +35,7 @@ class DockerBuildStage implements Serializable {
             script.writeFile file: 'Dockerfile', text: dockerfileContent
 
             script.sh "docker rm -f ${containerName} 2>/dev/null || true"
-            script.sh "docker rmi -f ${registry}/${dockerImageName}:${dockerImageTag} 2>/dev/null || true"
+            // script.sh "docker rmi -f ${registry}/${dockerImageName}:${dockerImageTag} 2>/dev/null || true"
             script.sh """
                 docker build \
                     --cache-from ${registry}/${dockerImageName}:${dockerImageTag} \
