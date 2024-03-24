@@ -2,16 +2,18 @@ package com.epam.pipeline
 
 class CheckoutStage implements Serializable {
     def script
+    def branchName
     String gitUrl
 
     CheckoutStage(script, String gitUrl) {
         this.script = script
+        this.branchName = branchName
         this.gitUrl = gitUrl
     }
 
     def run() {
         script.checkout([$class: 'GitSCM',
-                branches: [[name: 'main']],
+                branches: [[name: branchName ]],
                 userRemoteConfigs: [[url: gitUrl]],
                 extensions: [
                     [$class: 'CleanBeforeCheckout']
