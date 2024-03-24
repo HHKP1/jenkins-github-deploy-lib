@@ -11,7 +11,7 @@ class CheckoutStage implements Serializable {
 
     def run() {
         script.checkout([$class: 'GitSCM',
-                branch: [[name: 'main']],
+                branches: [[name: 'main']],
                 userRemoteConfigs: [[url: gitUrl]],
                 extensions: [
                     [$class: 'CleanBeforeCheckout']
