@@ -5,7 +5,7 @@ class DockerBuildStage implements Serializable {
     def utils
     String registry
     String containerName
-    String dockerfileTemplate
+    // String dockerfileTemplate
     String dockerImageName
     String dockerImageTag
     // String nodeVersion
@@ -16,11 +16,11 @@ class DockerBuildStage implements Serializable {
         this.utils = new Utils(script)
         this.registry = registry
         this.containerName = containerName
-        this.dockerfileTemplate = dockerfileTemplate
+        // this.dockerfileTemplate = dockerfileTemplate
         this.dockerImageName = dockerImageName
         this.dockerImageTag = dockerImageTag
-        this.nodeVersion = nodeVersion
-        this.containerPort = containerPort
+        // this.nodeVersion = nodeVersion
+        // this.containerPort = containerPort
     }
 
     def run() {
