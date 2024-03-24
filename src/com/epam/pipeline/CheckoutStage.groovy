@@ -5,7 +5,7 @@ class CheckoutStage implements Serializable {
     String branchName
     String gitUrl
 
-    CheckoutStage(script, String gitUrl) {
+    CheckoutStage(script, String branchName, String gitUrl) {
         this.script = script
         this.branchName = branchName
         this.gitUrl = gitUrl
