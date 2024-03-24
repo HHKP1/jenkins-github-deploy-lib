@@ -2,7 +2,7 @@ package com.epam.pipeline
 
 class CheckoutStage implements Serializable {
     def script
-    def branchName
+    String branchName
     String gitUrl
 
     CheckoutStage(script, String gitUrl) {
