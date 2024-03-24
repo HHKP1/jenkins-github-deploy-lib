@@ -8,10 +8,10 @@ class DockerBuildStage implements Serializable {
     String dockerfileTemplate
     String dockerImageName
     String dockerImageTag
-    String nodeVersion
-    int containerPort
+    // String nodeVersion
+    // int containerPort
 
-    DockerBuildStage(script, String registry, String containerName, String dockerfileTemplate, String dockerImageName, String dockerImageTag, String nodeVersion, int containerPort) {
+    DockerBuildStage(script, String registry, String containerName, String dockerImageName, String dockerImageTag) {
         this.script = script
         this.utils = new Utils(script)
         this.registry = registry
@@ -28,11 +28,11 @@ class DockerBuildStage implements Serializable {
             utils.printMessage('Building the Docker image...')
             script.sh "echo ${script.DOCKER_ACCESS_TOKEN} | docker login --username hhkp --password-stdin"
 
-            def dockerfileContent = script.libraryResource("com/epam/pipeline/templates/${dockerfileTemplate}")
-            dockerfileContent = dockerfileContent.replace('${NODE_VERSION}', nodeVersion)
-            dockerfileContent = dockerfileContent.replace('${CONTAINER_PORT}', containerPort.toString())
+            // def dockerfileContent = script.libraryResource("com/epam/pipeline/templates/${dockerfileTemplate}")
+            // dockerfileContent = dockerfileContent.replace('${NODE_VERSION}', nodeVersion)
+            // dockerfileContent = dockerfileContent.replace('${CONTAINER_PORT}', containerPort.toString())
 
-            script.writeFile file: 'Dockerfile', text: dockerfileContent
+            // script.writeFile file: 'Dockerfile', text: dockerfileContent
 
             script.sh "docker rm -f ${containerName} 2>/dev/null || true"
             script.sh "docker rmi -f ${registry}/${dockerImageName}:${dockerImageTag} 2>/dev/null || true"
